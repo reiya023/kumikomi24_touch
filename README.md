@@ -10,7 +10,7 @@ MPR121_demo.inoのSerial.printlnはマイコンの画面出力に変えれれば
 
 Wire.nantokaは全部i2Cに変えればいいんだけどやり方わからん、データシートとにらみ合う必要がありそう
 
-最悪MPR121_demo.inoで使う関数ruby化できればどうにかるかもしれない
+最悪MPR121_demo.inoで使う関数をruby化できればどうにかるかもしれない
 
 参考にするリアルタイムクロックをrubyにしたやつ
 https://github.com/gfd-dennou-club/mrubyc-gem-rx8035sa/tree/master
