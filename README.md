@@ -20,3 +20,5 @@ https://files.seeedstudio.com/wiki/Grove-12_Key_Capacitive_I2C_Touch_Sensor_V2-M
 
 タッチセンサwiki
 https://wiki.seeedstudio.com/Grove-12_Key_Capacitive_I2C_Touch_Sensor_V2-MPR121/
+
+大体mrubyc-gem-系のコードを参考にするといいらしい、センサ系のコードがgemって名前付いてるらしい
