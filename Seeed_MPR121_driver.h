@@ -101,9 +101,6 @@ typedef enum
     START_PROXIMITY_DISABLE_MODE,
 }sensor_mode_t;
 
-
-
-
 class Mpr121
 {
     public:
@@ -127,7 +124,5 @@ class Mpr121
         s32 sensor_start_proximity_enable();
         s32 sensor_start_proximity_disable();
 };
-
-
 
 #endif
