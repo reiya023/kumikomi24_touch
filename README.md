@@ -5,6 +5,7 @@ touchsensor.rbのMpr121クラスにSeeed_MPR121_driver.cppの関数を全部入�
 
 touchsensor.rbのtypedef enum(sensor_mode_t)もどうにかして置き換え
 
+MPR121_demo.inoをmaster.rbに置き換える
 MPR121_demo.inoのSerial.printlnはマイコンの画面出力に変えれればOK
 
 Wire.nantokaは全部i2Cに変えればいいんだけどやり方わからん、データシートとにらみ合う必要がありそう
