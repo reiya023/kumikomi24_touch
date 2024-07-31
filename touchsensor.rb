@@ -66,15 +66,17 @@ class Mpr121
       i2c.write(0x01,0x00)
   end
 
-  def read(reg, byte)
+  def read(reg)
     i2c.write(0x5B, reg)
     byte = i2c.readform(0x5B, 1)
+
+    return byte
   end
 
   def check_status_register
     val = 0;
-    read(0x00, val_l)
-    read(0x01, val_h)
+    val_l = read(0x00)
+    val_h = read(0x01)
     val = val_h << 8 | val_l
     return val
   end
@@ -84,10 +86,10 @@ class Mpr121
     channel_num = 12
     for i in 0...channel_num
       if
-        read(0x00+2*i, data_l)
-        read(0x00+2*i+1, data_h)
+        data_l = read(0x00+2*i)
+        data_h = read(0x00+2*i+1)
         elecs_filtered_data[i]=data_h << 8 | data_l
-        if 0X50 < elecs_filtered_data[i]
+        if 0x50 < elecs_filtered_data[i]
           elecs_stat &= !(1<<i)
         end
       end
