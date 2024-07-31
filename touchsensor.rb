@@ -62,6 +62,8 @@
 class Mpr121
   def initialize(i2c)
       @i2c = i2c
+      i2c.write(0x80,0x63) #タッチセンサーの初期化
+      i2c.write(0x01,0x00)
   end
 
 
