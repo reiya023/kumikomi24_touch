@@ -62,15 +62,30 @@
 class Mpr121
   def initialize(i2c)
       @i2c = i2c
-      i2c.write(0x80,0x63) #タッチセンサーの初期化
-      i2c.write(0x01,0x00)
+#      @i2c.write(0x5B, [0x80,0x63]) #タッチセンサーの初期化
+      @i2c.write(0x5B, [0x80, 0x63]) #タッチセンサーの初期化
+      # @i2c.write(0x00,0x00)
+      # @i2c.write(0x01,0x00)
+  end
+
+  def sensor_stop
+    @i2c.write(0X5E, 0)
+  end
+
+  def sensor_eneble
+    @i2c.write(0X5E, 0X3C)
+  end
+
+  def sensor_disable
+    @i2c.write(0X5E, 0X3C)
   end
 
   def read(reg)
-    i2c.write(0x5B, reg)
-    byte = i2c.readform(0x5B, 1)
+    @i2c.write(0x5B, reg)
+    byte = @i2c.readfrom(0x5B, 1)
+    #puts "#{reg.to_s(16)}: byte #{byte}"
 
-    return byte
+    return byte[0]
   end
 
   def check_status_register
@@ -78,6 +93,9 @@ class Mpr121
     val_l = read(0x00)
     val_h = read(0x01)
     val = val_h << 8 | val_l
+
+    puts "val #{val} val_l #{val_l} val_h #{val_h}"
+
     return val
   end
 
@@ -86,14 +104,17 @@ class Mpr121
     channel_num = 12
     for i in 0...channel_num
       if
-        data_l = read(0x00+2*i)
-        data_h = read(0x00+2*i+1)
-        elecs_filtered_data[i]=data_h << 8 | data_l
+        data_l = read(0x04+2*i)
+        data_h = read(0x04+2*i+1)
+        puts "data_l #{read(0x04+2*i)} data_h #{read(0x04+2*i+1)}"
+        elecs_filtered_data[i] = (data_h << 8) | data_l
         if 0x50 < elecs_filtered_data[i]
-          elecs_stat &= !(1<<i)
+          elecs_stat &= ~(1<<i)
         end
       end
     end
+
+    return elecs_stat
   end
 
 end
